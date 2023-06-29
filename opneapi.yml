@@ -267,6 +267,65 @@ paths:
                         type: string
                       icon_image:
                         type: string
+  /posts:
+    post:
+      tags:
+        - 投稿
+      summary: 作成
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                post:
+                  type: object
+                  required:
+                    - body
+                  properties:
+                    body:
+                      type: string
+                      description: 投稿内容
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  post:
+                    type: object
+                    required:
+                      - id
+                      - body
+                      - userId
+                      - createdAt
+                    properties:
+                      id:
+                        type: integer
+                      body:
+                        type: string
+                      userId:
+                        type: integer
+                      createdAt:
+                        type: string
+                        format: date-time
+                      user:
+                        type: object
+                        required:
+                          - id
+                          - name
+                          - email
+                        properties:
+                          id:
+                            type: integer
+                          name:
+                            type: string
+                          icon_image:
+                            type: string
 components:
   securitySchemes:
     BearerAuth:
