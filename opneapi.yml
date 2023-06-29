@@ -326,6 +326,58 @@ paths:
                             type: string
                           icon_image:
                             type: string
+  /posts/{id}:
+    get:
+      tags:
+        - 投稿
+      summary: 取得
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 投稿のID
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  post:
+                    type: object
+                    required:
+                      - id
+                      - body
+                      - userId
+                      - createdAt
+                    properties:
+                      id:
+                        type: integer
+                      body:
+                        type: string
+                      userId:
+                        type: integer
+                      createdAt:
+                        type: string
+                        format: date-time
+                      user:
+                        type: object
+                        required:
+                          - id
+                          - name
+                          - email
+                        properties:
+                          id:
+                            type: integer
+                          name:
+                            type: string
+                          icon_image:
+                            type: string
 components:
   securitySchemes:
     BearerAuth:
