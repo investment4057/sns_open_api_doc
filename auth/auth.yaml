@@ -1,0 +1,82 @@
+post:
+  tags:
+    - Auth
+  summary: サインイン
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          required:
+            - email
+            - password
+          properties:
+            email:
+              type: string
+              description: メールアドレス
+            password:
+              type: string
+              description: パスワード
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - token
+            properties:
+              user:
+                type: object
+                required:
+                  - id
+                  - name
+                  - email
+                properties:
+                  id:
+                    type: integer
+                    format: int32
+                  name:
+                    type: string
+                  email:
+                    type: string
+                  icon_image:
+                    type: string
+              token:
+                type: string
+                description: このtokenをヘッダーに入れて認証
+    400:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+delete:
+  tags:
+    - Auth
+  summary: サインアウト
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          required:
+            - deviceId
+          properties:
+            deviceId:
+              type: string
+              description: 端末固有のID
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            required:
+              - success
+            properties:
+              success:
+                type: boolean

@@ -1,0 +1,40 @@
+patch:
+  tags:
+    - アカウント
+  summary: プロフィール画像
+  security:
+    - BearerAuth: []
+  requestBody:
+    required: true
+    content:
+      multipart/form-data:
+        schema:
+          properties:
+            file:
+              type: string
+              format: binary
+              description: 画像ファイルをアップロードする
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              user:
+                type: object
+                required:
+                  - id
+                  - name
+                  - email
+                properties:
+                  id:
+                    type: integer
+                    format: int32
+                  name:
+                    type: string
+                  email:
+                    type: string
+                  icon_image:
+                    type: string

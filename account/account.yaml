@@ -1,0 +1,85 @@
+get:
+  tags:
+    - アカウント
+  summary: 取得
+  security:
+    - BearerAuth: []
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              user:
+                type: object
+                required:
+                  - id
+                  - name
+                  - email
+                properties:
+                  id:
+                    type: integer
+                    format: int32
+                  name:
+                    type: string
+                  email:
+                    type: string
+                  icon_image:
+                    type: string
+post:
+  tags:
+    - アカウント
+  summary: 作成
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          properties:
+            user:
+              type: object
+              required:
+                - name
+                - email
+                - password
+              properties:
+                name:
+                  type: string
+                  description: 名前
+                email:
+                  type: string
+                  description: メールアドレス
+                password:
+                  type: string
+                  description: パスワード
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - token
+            properties:
+              user:
+                type: object
+                required:
+                  - id
+                  - name
+                  - email
+                properties:
+                  id:
+                    type: integer
+                    format: int32
+                  name:
+                    type: string
+                  email:
+                    type: string
+                  icon_image:
+                    type: string
+              token:
+                type: string
+                description: このtokenをヘッダーに入れて認証
